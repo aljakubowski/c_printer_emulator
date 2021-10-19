@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Main {
 
     public static Scanner scanner = new Scanner(System.in);
-    public static Printer brother = new Printer();
+    public static Printer brotherPrinter = new Printer();
 
     public static void main(String[] args) {
 
         boolean quit = false;
         int select = 0;
-        brother.menu();
+        brotherPrinter.menu();
 
         while (!quit) {
 
@@ -26,10 +26,10 @@ public class Main {
 
             switch (select) {
                 case 0:
-                    brother.menu();
+                    brotherPrinter.menu();
                     break;
-                case 1:
 
+                case 1:
                     System.out.println("pages to print:");
                     int pagesToPrint = 0;
 
@@ -39,29 +39,42 @@ public class Main {
                     }
                     pagesToPrint = scanner.nextInt();
 
-
                     System.out.println("print duplex? true/false");
 
                     while (!scanner.hasNextBoolean()){
                         System.out.println("choose: true/false");
                         scanner.nextLine();
                     }
-
-
                     boolean duplexPrint = scanner.nextBoolean();
-                    brother.printPage(pagesToPrint, duplexPrint);
+
+                    brotherPrinter.printPage(pagesToPrint, duplexPrint);
                     break;
+
                 case 2:
-                    brother.fillUpTheToner();
+                    brotherPrinter.fillUpTheToner();
                     break;
                 case 3:
-                    brother.whatIsTonerLevel();
+                    brotherPrinter.whatIsTonerLevel();
+                    break;
+
+                case 4:
+                    System.out.println("sheets to add:");
+                    int sheets =0;
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("enter number:");
+                        scanner.nextLine();
+                    }
+                    sheets = scanner.nextInt();
+                    brotherPrinter.addPaper(sheets);
+                    break;
+                case 5:
+                    brotherPrinter.whatIsPaperCount();
                     break;
                 case 9:
+                    System.out.println("Printer is turning off...");
                     quit = true;
                     break;
             }
         }
-
     }
 }
